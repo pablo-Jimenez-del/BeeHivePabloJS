@@ -7,6 +7,6 @@ class Post {
         this.comments = [];
     }
     addComment(comment) {
-        this.comments.push(comment);
+            this.comments.unshift(comment);
     }
 }

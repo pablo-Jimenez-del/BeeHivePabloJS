@@ -1,0 +1,517 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+p {
+  font-family: "Roboto", sans-serif;
+}
+.appComponent {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.headerComponent {
+  background-color: #c3c3c3;
+  width: 100%;
+  height: 60px;
+}
+.beeComponent {
+  background: linear-gradient(125deg, rgba(176,176,176,1) 39%, rgba(195,195,195,1) 70%);
+  padding-bottom: 65px;
+  text-align: center;
+}
+
+.beesComponent {
+  background: linear-gradient(125deg, rgba(176,176,176,1) 39%, rgba(195,195,195,1) 70%);
+  height: 100vh;
+  float: left;
+  overflow-y: scroll;
+}
+.postsComponent {
+  background: linear-gradient(125deg, rgba(176,176,176,1) 39%, rgba(195,195,195,1) 70%);
+  height: 100vh;
+  float: left;
+  overflow-y: scroll;
+}
+.albumComponent {
+  background-color: #eb0808;
+  height: 100vh;
+  float: left;
+}
+.todosComponent {
+  background-color: #2a16e4;
+  height: 100vh;
+  float: left;
+}
+
+.beeName {
+  font-size: 18px;
+  font-weight: bold;
+  padding-top: 10px;
+}
+.beeUserName {
+  font-size: 16px;
+  font-weight: 600;
+}
+.beeEmail {
+  font-size: 16px;
+  font-weight: 600;
+}
+.beeImage {
+  padding-top: 17px;
+  padding-left: 9px;
+}
+.beePhone {
+  font-size: 16px;
+  font-weight: 600;
+}
+.beeCity {
+  font-size: 16px;
+  font-weight: 600;
+}
+.infoPost {
+  font-size: 14px;
+  font-weight: 600;
+  float: left;
+    padding-left: 40px;
+}
+.infoPhoto {
+  font-size: 14px;
+  font-weight: 600;
+  float: left;
+    padding-left: 17px;
+}
+.infoTodo {
+  font-size: 14px;
+  font-weight: 600;
+  float: left;
+    padding-left: 18px;
+}
+.divButtons{
+  padding-top: 72px;
+}
+.buttonPost {
+  background-color: transparent;
+  border: transparent;
+  transform: translate(-50%, -50%);
+  padding: 10px 10px;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 16px;
+  position: absolute;
+  left: 60px;
+}
+.buttonPost:hover{
+  color: #000000;
+}
+.buttonPost:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffe117;
+  z-index: -1;
+  transition: transform 0.5s;
+  transform-origin: bottom right;
+  transform: scale(0);
+}
+.buttonPost:hover:before {
+  transition: transform 0.5s;
+  transform-origin: top left;
+  transform: scale(1);
+}
+.buttonPost:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 2px solid #fff;
+  z-index: -1;
+  transition: transform 0.5s;
+  box-sizing: border-box;
+  transform-origin: bottom right;
+  transform: scale(1);
+}
+.buttonPost:hover:after {
+  transition: transform 0.5s;
+  transform-origin: bottom right;
+  transform: scale(0);
+}
+.buttonAlbum {
+  background-color: transparent;
+  border: transparent;
+  transform: translate(-50%, -50%);
+  padding: 10px 10px;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 16px;
+  position: absolute;
+    left: 160px;
+}
+.buttonAlbum:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffe117;
+  z-index: -1;
+  transition: transform 0.5s;
+  transform-origin: bottom right;
+  transform: scale(0);
+}
+.buttonAlbum:hover{
+  color: #000000;
+}
+.buttonAlbum:hover:before {
+  transition: transform 0.5s;
+  transform-origin: top left;
+  transform: scale(1);
+}
+.buttonAlbum:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 2px solid #fff;
+  z-index: -1;
+  transition: transform 0.5s;
+  box-sizing: border-box;
+  transform-origin: bottom right;
+  transform: scale(1);
+}
+.buttonAlbum:hover:after {
+  transition: transform 0.5s;
+  transform-origin: bottom right;
+  transform: scale(0);
+}
+
+
+.buttonTodo {
+  background-color: transparent;
+  border: transparent;
+  transform: translate(-50%, -50%);
+  padding: 10px 10px;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 16px;
+  position: absolute;
+  left: 255px;
+}
+.buttonTodo:hover{
+  color: #000000;
+}
+.buttonTodo:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffe117;
+  z-index: -1;
+  transition: transform 0.5s;
+  transform-origin: bottom right;
+  transform: scale(0);
+}
+.buttonTodo:hover:before {
+  transition: transform 0.5s;
+  transform-origin: top left;
+  transform: scale(1);
+}
+.buttonTodo:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 2px solid #fff;
+  z-index: -1;
+  transition: transform 0.5s;
+  box-sizing: border-box;
+  transform-origin: bottom right;
+  transform: scale(1);
+}
+.buttonTodo:hover:after {
+  transition: transform 0.5s;
+  transform-origin: bottom right;
+  transform: scale(0);
+}
+/*Loader*/
+.loadingComponent {
+  background-color: violet;
+  width: 100%;
+  height: 90vh;
+}
+.loadingTitle {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.loader {
+  background-color: thistle;
+  width: 100px;
+  position: absolute;
+  height: 100px;
+}
+/*Posts*/
+.postComponent {
+  background: linear-gradient(125deg, rgba(176,176,176,1) 39%, rgba(195,195,195,1) 70%);
+  min-height: 100px;
+  margin: 5px 5px 0px 5px;
+  padding: 5px 5px 5px 5px;
+}
+.postTitle {
+  font-size: 14px;
+  font-weight: bold;
+}
+.postBody {
+  font-size: 14px;
+}
+/*Comments*/
+.commentComponent {
+  background: linear-gradient(125deg, rgba(176,176,176,1) 39%, rgba(195,195,195,1) 70%);
+  border: 2px solid #fff;
+  min-height: 30px;
+  margin: 5px 0px 0px 0px;
+}
+
+.commentName {
+  font-size: 14px;
+  font-weight: bold;
+}
+.commentBody {
+  font-size: 14px;
+}
+/*Add to comment form*/
+.commentFormComponent {
+  position: absolute;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formBackground {
+  background-color: #3c3c3c;
+  width: 400px;
+  height: 400px;
+  padding-left: 71px;
+  padding-top: 38px;
+}
+.titleInput {
+  padding-bottom: 15px;
+  border-radius: 6px;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: #eee;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+.bodyTextarea {
+  max-height: 150px;
+  min-height: 150px;
+  max-width: 320px;
+  min-width: 256px;
+  margin-top: 27px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: #eee;
+  font-size: 1.3em;
+}
+.cancelBtn {
+  position: absolute;
+  top: 69%;
+  left: 43%;
+  background-color: transparent;
+  border: transparent;
+  transform: translate(-50%, -50%);
+  padding: 15px 30px;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 2px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.cancelBtn:hover{
+  color: #000000;
+}
+.cancelBtn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffe117;
+  z-index: -1;
+  transition: transform 0.5s;
+  transform-origin: bottom right;
+  transform: scale(0);
+}
+.cancelBtn:hover:before {
+  transition: transform 0.5s;
+  transform-origin: top left;
+  transform: scale(1);
+ 
+}
+.cancelBtn:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 2px solid #fff;
+  z-index: -1;
+  transition: transform 0.5s;
+  box-sizing: border-box;
+  transform-origin: bottom right;
+  transform: scale(1);
+}
+.cancelBtn:hover:after {
+  transition: transform 0.5s;
+  transform-origin: bottom right;
+  transform: scale(0);
+
+}
+.enviarBtn {
+  position: absolute;
+  top: 69%;
+  left: 57%;
+  background-color: transparent;
+  border: transparent;
+  transform: translate(-50%, -50%);
+  padding: 15px 30px;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 2px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.enviarBtn:hover{
+  color: #000000;
+}
+.enviarBtn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffe117;
+  z-index: -1;
+  transition: transform 0.5s;
+  transform-origin: bottom right;
+  transform: scale(0);
+}
+.enviarBtn:hover:before {
+  transition: transform 0.5s;
+  transform-origin: top left;
+  transform: scale(1);
+}
+.enviarBtn:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 2px solid #fff;
+  z-index: -1;
+  transition: transform 0.5s;
+  box-sizing: border-box;
+  transform-origin: bottom right;
+  transform: scale(1);
+}
+.enviarBtn:hover:after {
+  transition: transform 0.5s;
+  transform-origin: bottom right;
+  transform: scale(0);
+}
+.swal2-styled.swal2-confirm {
+  background-color: #ffe117 !important;
+  color: #000000 !important;
+}
+.swal2-title{
+  color: #000000 !important;
+}
+
+@media (max-width: 500px) {
+  .beesComponent {
+    width: 100% !important;
+  }
+  .postsComponent {
+    display: none;
+    width: 100%;
+  }
+  .albumComponent {
+    display: none;
+    width: 100%;
+  }
+  .todosComponent {
+    display: none;
+    width: 100%;
+  }
+  .enviarBtn {
+    left: 70%;
+  }
+  .cancelBtn {
+    left: 35%;
+  }
+}
+
+@media (max-width: 575px) {
+  .beesComponent {
+    width: 50%;
+  }
+  .postsComponent {
+    width: 50%;
+  }
+  .albumComponent {
+    display: none;
+    width: 50%;
+  }
+  .todosComponent {
+    display: none;
+    width: 50%;
+  }
+  .enviarBtn {
+    left: 70%;
+  }
+  .cancelBtn {
+    left: 35%;
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+}
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+@media (min-width: 1200px) {
+}
