@@ -11,7 +11,6 @@ class AppComponent extends Component{
         this.albumsComponent = new AlbumComponent(this.container);
         this.todosComponent = new TodosComponent(this.container);
         this.commentFormComponent = new CommentFormComponent(this.container);
-
-
+        this.photoComponent = new PhotoComponent(this.container);
     }
 }

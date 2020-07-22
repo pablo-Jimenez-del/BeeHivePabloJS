@@ -45,6 +45,7 @@ class CommentFormComponent extends Component {
   onCancelButton(e) {
     AppManager.getInstance().uiManager.hideCommentForm(null, null);
   }
+
   onEnviarButton(e) {
     var title = this.title.value;
     var body = this.body.value;
@@ -75,7 +76,6 @@ class CommentFormComponent extends Component {
       document.getElementById("inputTitleForm").value = "";
       document.getElementById("textareaForm").value = "";
     }
-
     AppManager.getInstance().uiManager.addNewComment(title, body);
   }
 }

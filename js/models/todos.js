@@ -1,8 +1,8 @@
-class Todos {
-    constructor(completed, id, title, userId) {
-        this.completed = completed;
-        this.id = id;
-        this.title = title;
-        this.userId = userId;
-    }
+class Todo {
+  constructor(id, title, userId, completed) {
+    this.id = id;
+    this.title = title;
+    this.userId = userId;
+    this.completed = completed;
+  }
 }

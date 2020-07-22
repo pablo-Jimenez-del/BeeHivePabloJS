@@ -1,22 +1,22 @@
 class DataManager {
   constructor(appManager) {
-    this.bees = [];
-    this.posts = [];
-    this.todos = [];
-    this.albums = [];
+    this.appManager = appManager;
     this.beesUrl = "https://beehive-270a2.firebaseio.com/data/users.json";
     this.postsUrl = "https://beehive-270a2.firebaseio.com/data/posts.json";
     this.commentsUrl =
       "https://beehive-270a2.firebaseio.com/data/comments.json";
-    this.albumsUrl = "https://beehive-270a2.firebaseio.com/data/albums.json";
-    this.photosUrl = "https://beehive-270a2.firebaseio.com/data/photos.json";
+    this.albumUrl = "https://beehive-270a2.firebaseio.com/data/albums.json";
     this.todosUrl = "https://beehive-270a2.firebaseio.com/data/todos.json";
-    this.appManager = appManager;
+    this.photosUrl = "https://beehive-270a2.firebaseio.com/data/photos.json";
+    this.bees = [];
   }
+
   start() {
+    //this.appManager.uiManager.showLoading();
     //Simplificado las url
     this.sendRequest(this.beesUrl, this.getBeesComplete.bind(this));
   }
+
   sendRequest(url, callback) {
     var request = new XMLHttpRequest();
     request.addEventListener("load", callback);
@@ -32,7 +32,6 @@ class DataManager {
 
       for (let i = 0; i < data.length; i++) {
         var beeData = data[i];
-
         var company = new Company(
           beeData.company.bs,
           beeData.company.catchPhrase,
@@ -46,7 +45,6 @@ class DataManager {
           beeData.address.suite,
           beeData.address.zipcode
         );
-
         var bee = new Bee(
           beeData.id,
           beeData.name,
@@ -59,58 +57,47 @@ class DataManager {
           beeData.image,
           beeData.owner
         );
+        //Usuario principal
         if (bee.owner) {
-          AppManager.getInstance().owner = bee
+          AppManager.getInstance().owner = bee;
         }
+
         this.bees.push(bee);
       }
       //Se extrae los post cuando haya ya parseado todos los bees
-      this.sendRequest(this.postsUrl, this.getPostComplete.bind(this));
-      console.log(this.bees);
+      this.sendRequest(this.postsUrl, this.getPostsComplete.bind(this));
     } else {
-      console.log("Hubo un error en el request");
+      console.log("Error on request: bees");
     }
   }
 
-  // extrae los Post del url
-  getPostComplete(e) {
+  getPostsComplete(e) {
     var request = e.target;
-
     if (request.status === 200) {
       var data = JSON.parse(request.responseText);
       for (let i = 0; i < data.length; i++) {
         var postData = data[i];
-
         var post = new Post(
           postData.id,
           postData.body,
           postData.title,
           postData.userId
         );
-        this.posts.push(post);
         //Se agrega el metodo cada vez que se agrega un post
         this.addPostToBee(post);
       }
       //Se agrega los comentarios cuando ya se haya agregado el post
       this.sendRequest(this.commentsUrl, this.getCommentsComplete.bind(this));
-      //Se agrega los TODOS
-      this.sendRequest(this.todosUrl, this.getTodosComplete.bind(this));
-      //Agrego el album al bee
-      this.sendRequest(this.albumsUrl, this.getAlbumComplete.bind(this));
-      //Agrego las fotos al  album
-      this.sendRequest(this.photosUrl, this.getPhotoComplete.bind(this));
-
-      // console.log(this.bees);
     } else {
-      console.log("Hubo un error en el request");
+      console.log("Error on request: posts");
     }
   }
 
-  // agregar los post a los bees
   addPostToBee(post) {
     this.bees.forEach((bee) => {
       if (bee.id === post.userId) {
         bee.addPost(post);
+        return;
       }
     });
   }
@@ -118,54 +105,54 @@ class DataManager {
   // extrae los comments de la url
   getCommentsComplete(e) {
     var request = e.target;
-
     if (request.status === 200) {
       var data = JSON.parse(request.responseText);
       for (let i = 0; i < data.length; i++) {
         var commentData = data[i];
-        var comment = new Comment(
-          commentData.body,
-          commentData.email,
+        var comment = new PostComment(
           commentData.id,
+          commentData.postId,
           commentData.name,
-          commentData.postId
+          commentData.body,
+          commentData.email
         );
         //Agrego el comentario al post
-        this.addCommentToPost(comment);
+        this.addCommentToBeePost(comment);
       }
-      this.appManager.uiManager.showUI();
+      this.sendRequest(this.albumUrl, this.getAlbumsComplete.bind(this));
     } else {
-      console.log("error al argar servidor");
+      console.log("Error on request: comments");
     }
   }
 
   // agregar los comentarios a los post
-  addCommentToPost(comment) {
-    this.posts.forEach((post) => {
-      if (post.id === comment.postId) {
+  addCommentToBeePost(comment) {
+    this.bees.forEach((bee) => {
+      bee.posts.forEach((post) => {
         post.addComment(comment);
-      }
+      });
     });
   }
 
   //extraer los TODOS
   getTodosComplete(e) {
     var request = e.target;
-
     if (request.status === 200) {
       var data = JSON.parse(request.responseText);
       for (let i = 0; i < data.length; i++) {
-        var todosData = data[i];
-        var todo = new Todos(
-          todosData.completed,
-          todosData.id,
-          todosData.title,
-          todosData.userId
+        const todoData = data[i];
+        var todo = new Todo(
+          todoData.id,
+          todoData.title,
+          todoData.userId,
+          todoData.completed
         );
         this.addTodoToBee(todo);
       }
+      console.log(this.bees);
+      this.appManager.uiManager.showUI();
     } else {
-      console.log("Hubo un error en el request");
+      console.log("Error on request: todos");
     }
   }
 
@@ -174,33 +161,33 @@ class DataManager {
     this.bees.forEach((bee) => {
       if (bee.id === todo.userId) {
         bee.addTodo(todo);
+        return;
       }
     });
   }
 
   //ALBUM EXTRAER
-  getAlbumComplete(e) {
+  getAlbumsComplete(e) {
     var request = e.target;
-
     if (request.status === 200) {
       var data = JSON.parse(request.responseText);
       for (let i = 0; i < data.length; i++) {
         var albumData = data[i];
         var album = new Album(albumData.id, albumData.title, albumData.userId);
-        //Agrega el album
-        this.albums.push(album);
         this.addAlbumToBee(album);
       }
+      this.sendRequest(this.photosUrl, this.getPhotoComplete.bind(this));
     } else {
-      console.log("Hubo un error en el request");
+      console.log("Error on request: album");
     }
   }
 
   //Album agregar al BEE
   addAlbumToBee(album) {
     this.bees.forEach((bee) => {
-      if (bee.id === album.userId) {
+      if (album.userId === bee.id) {
         bee.addAlbum(album);
+        return;
       }
     });
   }
@@ -208,32 +195,34 @@ class DataManager {
   // extraer fotos url
   getPhotoComplete(e) {
     var request = e.target;
-
     if (request.status === 200) {
       var data = JSON.parse(request.responseText);
       for (let i = 0; i < data.length; i++) {
         var photoData = data[i];
         var photo = new Photo(
-          photoData.albumId,
           photoData.id,
-          photoData.thumbnailUrl,
+          photoData.albumId,
           photoData.title,
+          photoData.thumbnailUrl,
           photoData.url
         );
         //Agrego las fotos al album
         this.addPhotoToAlbum(photo);
       }
+      this.sendRequest(this.todosUrl, this.getTodosComplete.bind(this));
     } else {
-      console.log("error al argar servidor");
+      console.log("Error on request: photo");
     }
   }
 
   // agregar las fotos al album
   addPhotoToAlbum(photo) {
-    this.albums.forEach((album) => {
-      if (album.id === photo.albumId) {
-        album.addPhoto(photo);
-      }
+    this.bees.forEach((bee) => {
+      bee.albums.forEach((album) => {
+        if (album.id === photo.albumId) {
+          album.addPhoto(photo);
+        }
+      });
     });
   }
 }

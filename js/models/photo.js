@@ -1,9 +1,9 @@
 class Photo {
-    constructor(albumId, id, thumbnailUrl, title, url) {
-        this.albumId = albumId;
-        this.id = id;
-        this.thumbnailUrl = thumbnailUrl;
-        this.title = title;
-        this.url = url;
-    }
+  constructor(id, albumId, title, thumbnailUrl, url) {
+    this.id = id;
+    this.albumId = albumId;
+    this.title = title;
+    this.thumbnailUrl = thumbnailUrl;
+    this.url = url;
+  }
 }

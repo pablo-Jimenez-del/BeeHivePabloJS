@@ -10,9 +10,9 @@ class PostsComponent extends Component {
 
   showBeePosts(bee, resetPosition) {
     if (resetPosition) {
-      this.container.scrollTo(0,0);
+      this.container.scrollTo(0, 0);
     }
-    this.container.innerHTML = '';
+    this.container.innerHTML = "";
     bee.posts.forEach((post) => {
       var postComponent = new PostComponent(this.container, post);
     });

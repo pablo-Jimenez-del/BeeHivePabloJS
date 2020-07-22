@@ -5,16 +5,13 @@ class BeeComponent extends Component {
     this.container.id = "beeComponent";
     this.container.classList.add("beeComponent");
 
-
     //Añado los Bees name, username etc
     //Model viene del modelo Bee
-
 
     var beeImage = document.createElement("img");
     beeImage.src = model.image;
     beeImage.classList.add("beeImage");
     this.container.appendChild(beeImage);
-
 
     var beeName = document.createElement("p");
     beeName.innerHTML = model.name;
@@ -56,14 +53,9 @@ class BeeComponent extends Component {
     infoTodo.classList.add("infoTodo");
     this.container.appendChild(infoTodo);
 
-
     this.divButtons = document.createElement("div");
     this.divButtons.classList.add("divButtons");
     this.container.appendChild(this.divButtons);
-
-
-
-
 
     this.buttonPost = document.createElement("button");
     this.buttonPost.innerHTML = "Posts";
@@ -88,9 +80,7 @@ class BeeComponent extends Component {
   }
 
   onContainerClick(e) {
-    //AppManager.getInstance().uiManager.refreshPostsComponent(this, true);
-    var appManager = AppManager.getInstance();
-    appManager.uiManager.refreshPostsComponent(this.model);
+    AppManager.getInstance().uiManager.refreshPostsComponent(this, true);
   }
 
   onBtnPost(e) {
